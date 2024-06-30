@@ -20,9 +20,8 @@ import {
 import { CardWrapper } from "@/components/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { login } from "@/actions/login";
-// import { FormError } from "@/components/form-error";
-// import { FormSuccess } from "@/components/form-success";
-// import { login } from "@/actions/login";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -44,6 +43,7 @@ export const LoginForm = () => {
       password: "",
     },
   });
+  // nedd
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     console.log(values);
@@ -54,7 +54,7 @@ export const LoginForm = () => {
       login(values, callbackUrl)
         .then((data) => {
           if (data?.error) {
-            form.reset();
+            // form.reset();
             setError(data.error);
           }
 
@@ -63,9 +63,9 @@ export const LoginForm = () => {
             setSuccess(data.success);
           }
 
-          if (data?.twoFactor) {
-            setShowTwoFactor(true);
-          }
+          // if (data?.twoFactor) {
+          //   setShowTwoFactor(true);
+          // }
         })
         .catch(() => setError("Something went wrong"));
     });
@@ -75,7 +75,7 @@ export const LoginForm = () => {
     <CardWrapper
       headerLabel="Welcome back"
       backButtonLabel="Don't have an account?"
-      backButtonHref="/auth/register"
+      backButtonHref="/register"
       showSocial
     >
       <Form {...form}>
@@ -149,8 +149,8 @@ export const LoginForm = () => {
               </>
             )}
           </div>
-          {/* <FormError message={error || urlError} /> */}
-          {/* <FormSuccess message={success} /> */}
+          <FormError message={error || urlError} />
+          <FormSuccess message={success} />
           <Button disabled={isPending} type="submit" className="w-full">
             {showTwoFactor ? "Confirm" : "Login"}
           </Button>
