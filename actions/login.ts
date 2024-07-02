@@ -38,12 +38,13 @@ export const login = async (
       existingUser.email,
     );
 
-    await sendVerificationEmail(
-      verificationToken.email,
-      verificationToken.token,
-    );
+    // the email provider does not exit ...
+    // await sendVerificationEmail(
+    //   verificationToken.email,
+    //   verificationToken.token,
+    // );
 
-    return { success: "Confirmation email sent!" };
+    return { verify: verificationToken };
   }
 
   try {
