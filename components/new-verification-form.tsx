@@ -52,7 +52,7 @@ export const NewVerificationForm = () => {
       backButtonHref="/login"
     >
       <div className="flex items-center w-full justify-center">
-        {!success && !error && <BeatLoader />}
+        {!success && !error && <BeatLoader size={5} color="#ffffff" />}
         <FormSuccess message={success} />
         {!success && <FormError message={error} />}
       </div>

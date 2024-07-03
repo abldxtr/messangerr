@@ -116,7 +116,7 @@ export const RegisterForm = () => {
           <FormSuccess message={success} />
           <Button disabled={isPending} type="submit" className="w-full">
             {isPending ? (
-              <BeatLoader size={5} color="white" />
+              <BeatLoader size={5} color="#ffffff" />
             ) : (
               "Create an account"
             )}

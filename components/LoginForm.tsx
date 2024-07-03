@@ -141,7 +141,7 @@ export const LoginForm = () => {
           <FormError message={error || urlError} />
           <FormSuccess message={success} />
           <Button disabled={isPending} type="submit" className="w-full">
-            {isPending ? <BeatLoader size={10} /> : "Login"}
+            {isPending ? <BeatLoader size={5} color="#ffffff" /> : "Login"}
           </Button>
         </form>
       </Form>

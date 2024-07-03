@@ -6,14 +6,14 @@ const Setting = async () => {
     
   return ( 
     <div className=" w-full h-screen flex items-center justify-center ">
-      <div>
+      <div className="flex flex-col">
 
 {JSON.stringify(session)}
       </div>
       <div>
   <form action={async () => {
       "use server"
-      await signOut()
+      await signOut({  redirect: true, redirectTo:"/login" })
     }
   }>
     <button type="submit">sign out</button>
