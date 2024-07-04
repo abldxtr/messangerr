@@ -35,10 +35,12 @@ export default async function RootLayout({
           ></link>
         </head>
         <GlobalProvider>
-          <body className={classNames(inter.className, "h-full w-full")}>
+          <body
+            className={classNames(inter.className, "h-full w-full bg-white")}
+          >
             <ThemeProvider
               attribute="class"
-              defaultTheme="system"
+              defaultTheme="light"
               enableSystem
               disableTransitionOnChange
             >
