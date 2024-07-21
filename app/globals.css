@@ -79,4 +79,17 @@
   .gradientText {
     @apply inline-block bg-clip-text text-transparent bg-gradient-to-r from-[#7263f3] to-[#f56693];
   }
+  .scrl {
+    @apply custom-scroll  scrollbar-thin scrollbar scrollbar-thumb-[#00000080] scrollbar-track-[#00000040];
+  }
+}
+
+@layer utilities {
+  .custom-scroll::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+  }
+
+  .custom-scroll::-webkit-scrollbar-track {
+    border-radius: 5px;
+  }
 }

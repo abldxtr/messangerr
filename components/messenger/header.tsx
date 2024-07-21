@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   SvgIcon1,
@@ -11,8 +13,11 @@ import {
   SvgIcon9,
   SvgIcon10,
 } from "./SvgIcon";
+import { useSocket } from "@/provider/socket-provider";
+import classNames from "classnames";
 
 export default function Header() {
+  const { isConnected } = useSocket();
   const icons = [
     SvgIcon2,
     SvgIcon3,
@@ -64,12 +69,18 @@ export default function Header() {
       {/* <!-- profile pic --> */}
 
       <div className="my-[12px] flex flex-col items-center">
-        <div className="flex size-[52px] cursor-pointer items-center justify-center rounded-full transition-all duration-300 hover:bg-[#0f14191a]">
+        <div className="flex relative size-[52px] cursor-pointer items-center justify-center rounded-full transition-all duration-300 hover:bg-[#0f14191a]">
           <img
             alt="abol.dexter"
             draggable="true"
             src="https://pbs.twimg.com/profile_images/1564361710554734593/jgWXrher_normal.jpg"
             className="size-[24px] rounded-full"
+          />
+          <div
+            className={classNames(
+              " size-2 rounded-full absolute top-[12px] right-3   ",
+              isConnected ? "bg-green-400" : "bg-red-400",
+            )}
           />
         </div>
       </div>

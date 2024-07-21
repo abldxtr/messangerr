@@ -5,7 +5,9 @@ import { getUserByEmail } from "@/data/user";
 import { getVerificationTokenByToken } from "@/data/verificiation-token";
 
 export const newVerification = async (token: string) => {
+  console.log("tokenn", token);
   const existingToken = await getVerificationTokenByToken(token);
+  console.log("existingToken", existingToken);
 
   if (!existingToken) {
     return { error: "Token does not exist!" };
@@ -17,17 +19,17 @@ export const newVerification = async (token: string) => {
     return { error: "Token has expired!" };
   }
 
-  const existingUser = await getUserByEmail(existingToken.email);
+  const existingUser = await getUserByEmail(existingToken.identifier);
 
   if (!existingUser) {
     return { error: "Email does not exist!" };
   }
 
   await db.user.update({
-    where: { id: existingUser.id },
+    where: { email: existingUser.identifier },
     data: {
       emailVerified: new Date(),
-      email: existingToken.email,
+      // email: existingToken.identifier,
     },
   });
 

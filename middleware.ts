@@ -7,19 +7,24 @@ import {
   authRoutes,
   publicRoutes,
 } from "@/routes";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
   const { nextUrl } = req;
-  console.log("nextUrl", nextUrl);
+  // console.log("nextUrl", nextUrl);
   const isLoggedIn = !!req.auth;
   console.log("req", isLoggedIn);
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+  const isHome = nextUrl.pathname.startsWith("/");
+
+  if (isHome) {
+    return NextResponse.next();
+  }
 
   if (isApiAuthRoute) {
     return NextResponse.next();
@@ -54,5 +59,11 @@ export default auth((req) => {
 
 // Optionally, don't invoke Middleware on some paths
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: [
+    "/((?!.+\\.[\\w]+$|_next).*)",
+    // "/",
+    // "/api/auth/session",
+    "/(api|trpc)(.*)",
+    // "/((?!api/socket).*)",
+  ],
 };

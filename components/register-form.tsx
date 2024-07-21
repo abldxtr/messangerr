@@ -21,11 +21,13 @@ import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { register } from "@/actions/register";
 import { BeatLoader } from "react-spinners";
+import Link from "next/link";
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
+  const [verify, setVerify] = useState<string | undefined>("");
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -43,7 +45,7 @@ export const RegisterForm = () => {
     startTransition(() => {
       register(values).then((data) => {
         setError(data.error);
-        setSuccess(data.success);
+        setVerify(data.success);
       });
     });
   };
@@ -114,6 +116,30 @@ export const RegisterForm = () => {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
+          {verify && (
+            <Button
+              size="sm"
+              variant="link"
+              asChild
+              className="px-0 font-normal"
+            >
+              <Link href={`/new-verification?token=${verify}`}>
+                verification link
+              </Link>
+            </Button>
+          )}
+          {verify && (
+            <Button
+              size="sm"
+              variant="link"
+              asChild
+              className="px-0 font-normal"
+            >
+              <Link href={`/new-verification?token=${verify}`}>
+                verification link
+              </Link>
+            </Button>
+          )}
           <Button disabled={isPending} type="submit" className="w-full">
             {isPending ? (
               <BeatLoader size={5} color="#ffffff" />

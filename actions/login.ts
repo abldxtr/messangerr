@@ -22,14 +22,15 @@ export const login = async (
   }
   // console.log(values);
 
-  const { email, password, code } = validatedFields.data;
+  const { email, password } = validatedFields.data;
 
   const existingUser = await getUserByEmail(email);
+  console.log("existingUser", existingUser);
 
-  if (!existingUser || !existingUser.email || !existingUser.password) {
+  if (!existingUser || !existingUser.email || !existingUser.hashedPassword) {
     return { error: "Email does not exist!" };
   }
-  if (existingUser.password !== password) {
+  if (existingUser.hashedPassword !== password) {
     return { error: "Email or password does not match!" };
   }
 

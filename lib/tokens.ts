@@ -8,6 +8,7 @@ import { getPasswordResetTokenByEmail } from "@/data/password-reset-token";
 
 export const generatePasswordResetToken = async (email: string) => {
   const token = uuidv4();
+
   const expires = new Date(new Date().getTime() + 3600 * 1000);
 
   const existingToken = await getPasswordResetTokenByEmail(email);
@@ -31,6 +32,8 @@ export const generatePasswordResetToken = async (email: string) => {
 
 export const generateVerificationToken = async (email: string) => {
   const token = uuidv4();
+  // const identifier = uuidv4();
+
   const expires = new Date(new Date().getTime() + 3600 * 1000);
 
   const existingToken = await getVerificationTokenByEmail(email);
@@ -45,11 +48,12 @@ export const generateVerificationToken = async (email: string) => {
 
   const verficationToken = await db.verificationToken.create({
     data: {
-      email,
       token,
       expires,
+      identifier: email,
     },
   });
+  console.log("verficationToken", verficationToken);
 
   return verficationToken;
 };

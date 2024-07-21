@@ -1,17 +1,28 @@
 import MainContent from "@/components/messenger/MainContent";
 import Sidebar from "@/components/messenger/Sidebar";
 import Header from "@/components/messenger/header";
+import Main from "@/components/messenger/main";
+import { useSocket } from "@/provider/socket-provider";
 import Image from "next/image";
+import { auth } from "@/auth";
 
-export default function Home() {
+import { redirect } from "next/navigation";
+
+export default async function Home() {
+  const Session = await auth();
+  console.log("Session", Session);
+
+  // if (!Session) {
+  //   redirect("/login");
+  // }
   return (
     <main className="container isolate mx-auto flex h-screen  overflow-hidden">
       {/* new line for twitter like chat */}
-      <div className=" overflow-auto w-full h-full  ">
+      <div className=" overflow-auto  h-full scrl  ">
         <Header />
       </div>
       {/* <ChatBox /> */}
-      {/* <Main /> */}
+      <Main />
     </main>
   );
 }
