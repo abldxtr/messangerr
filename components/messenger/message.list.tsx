@@ -1,4 +1,10 @@
+"use client";
+
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 export default function Message_list() {
+  const router = useRouter();
   return (
     <section className=" max-w-[400px] lg:flex hidden  relative flex-1 border-x-[1px] border-[#eff3f4]">
       <div className="flex  w-full flex-col">
@@ -108,15 +114,22 @@ export default function Message_list() {
             </div>
           </div>
           {/* <!-- 2 --> */}
-          <div className="min-h-[40px] w-full flex-1   ">
-            <div className="flex  min-h-[40px] items-start cursor-pointer p-[12px] justify-between group transition-all hover:bg-[#f7f9f9] ">
+          <div
+            className="min-h-[40px] w-full flex-1   "
+            onClick={() => router.push("/conversations/123456")}
+          >
+            <div
+              className="flex  min-h-[40px] items-center cursor-pointer p-[12px] justify-between group 
+            transition-all hover:bg-[#f7f9f9] "
+            >
               {/* <!-- icone or profile pic --> */}
-              <div className="mr-[16px] flex size-[48px] cursor-pointer items-center justify-center rounded-full border border-[#e5eaec] bg-[#ffffff] transition-all duration-300  ">
-                <img
-                  alt="abol.dexter"
+              <div className="mr-[16px] flex relative size-[48px] cursor-pointer items-center justify-center rounded-full border border-[#e5eaec] bg-[#ffffff] transition-all duration-300  ">
+                <Image
+                  alt="Aerospace"
                   draggable="true"
                   src="https://pbs.twimg.com/profile_images/1564361710554734593/jgWXrher_normal.jpg"
                   className="size-full rounded-full"
+                  fill
                 />
               </div>
 

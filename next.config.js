@@ -12,6 +12,9 @@ const nextConfig = {
     });
     return config;
   },
+  images: {
+    domains: ["pbs.twimg.com"],
+  },
 };
 
 module.exports = nextConfig;
