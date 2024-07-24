@@ -7,6 +7,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/provider/ThemeProvider ";
 import { GlobalProvider } from "@/context/globalContext";
 import classNames from "classnames";
+import { MessageProvider } from "@/context/MessageContext";
+import { EmojiProvider } from "@/context/EmojiContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +27,7 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html lang="en">
-        <head>
+        {/* <head>
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -33,21 +35,28 @@ export default async function RootLayout({
             crossOrigin="anonymous"
             referrerPolicy="no-referrer"
           ></link>
-        </head>
+        </head> */}
         <GlobalProvider>
-          <body
-            className={classNames(inter.className, "h-full w-full bg-white")}
-          >
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="light"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <Toaster />
-              {children}
-            </ThemeProvider>
-          </body>
+          <MessageProvider>
+            <EmojiProvider>
+              <body
+                className={classNames(
+                  inter.className,
+                  "h-full w-full bg-white",
+                )}
+              >
+                <ThemeProvider
+                  attribute="class"
+                  defaultTheme="light"
+                  enableSystem
+                  disableTransitionOnChange
+                >
+                  <Toaster />
+                  {children}
+                </ThemeProvider>
+              </body>
+            </EmojiProvider>
+          </MessageProvider>
         </GlobalProvider>
       </html>
     </SessionProvider>

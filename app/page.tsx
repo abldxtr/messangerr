@@ -1,17 +1,18 @@
 import MainContent from "@/components/messenger/MainContent";
 import Sidebar from "@/components/messenger/Sidebar";
 import Header from "@/components/messenger/header";
+import Main from "@/components/messenger/main";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <main className="container isolate mx-auto flex h-screen  overflow-hidden">
       {/* new line for twitter like chat */}
-      <div className=" overflow-auto w-full h-full  ">
+      <div className=" overflow-auto  h-full scrl  ">
         <Header />
       </div>
       {/* <ChatBox /> */}
-      {/* <Main /> */}
+      <Main />
     </main>
   );
 }
