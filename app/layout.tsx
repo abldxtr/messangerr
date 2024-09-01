@@ -10,6 +10,7 @@ import classNames from "classnames";
 import { MessageProvider } from "@/context/MessageContext";
 import { EmojiProvider } from "@/context/EmojiContext";
 import { SocketProvider } from "@/provider/socket-provider";
+import Header from "@/components/messenger/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,17 +27,12 @@ export default async function RootLayout({
   const session = await auth();
 
   return (
-    <SessionProvider session={session}>
-      <html lang="en">
-        <head>
-          {/* <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-            crossOrigin="anonymous"
-            referrerPolicy="no-referrer"
-          ></link> */}
-        </head>
+    <html lang="en"  
+    suppressHydrationWarning={true}
+    
+    >
+        <SessionProvider session={session}>
+
         <GlobalProvider>
           <MessageProvider>
             <EmojiProvider>
@@ -54,14 +50,23 @@ export default async function RootLayout({
                 >
                   <SocketProvider>
                     <Toaster />
-                    {children}
+                    <main className="container isolate mx-auto flex h-screen  overflow-hidden">
+                      {/* new line for twitter like chat */}
+                      {/* <div className=" overflow-auto  h-full scrl hidden sm:block  ">
+                        <Header />
+                      </div> */}
+                      {/* <ChatBox /> */}
+                      {children}
+                    </main>
+
+
                   </SocketProvider>
                 </ThemeProvider>
               </body>
             </EmojiProvider>
           </MessageProvider>
         </GlobalProvider>
-      </html>
     </SessionProvider>
+      </html>
   );
 }

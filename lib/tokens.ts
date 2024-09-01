@@ -13,21 +13,21 @@ export const generatePasswordResetToken = async (email: string) => {
 
   const existingToken = await getPasswordResetTokenByEmail(email);
 
-  if (existingToken) {
-    await db.passwordResetToken.delete({
-      where: { id: existingToken.id },
-    });
-  }
+  // if (existingToken) {
+  //   await db.passwordResetToken.delete({
+  //     where: { id: existingToken.id },
+  //   });
+  // }
 
-  const passwordResetToken = await db.passwordResetToken.create({
-    data: {
-      email,
-      token,
-      expires,
-    },
-  });
+  // const passwordResetToken = await db.passwordResetToken.create({
+  //   data: {
+  //     email,
+  //     token,
+  //     expires,
+  //   },
+  // });
 
-  return passwordResetToken;
+  // return passwordResetToken;
 };
 
 export const generateVerificationToken = async (email: string) => {
@@ -36,24 +36,24 @@ export const generateVerificationToken = async (email: string) => {
 
   const expires = new Date(new Date().getTime() + 3600 * 1000);
 
-  const existingToken = await getVerificationTokenByEmail(email);
+  // const existingToken = await getVerificationTokenByEmail(email);
 
-  if (existingToken) {
-    await db.verificationToken.delete({
-      where: {
-        id: existingToken.id,
-      },
-    });
-  }
+  // if (existingToken) {
+  //   await db.verificationToken.delete({
+  //     where: {
+  //       id: existingToken.id,
+  //     },
+  //   });
+  // }
 
-  const verficationToken = await db.verificationToken.create({
-    data: {
-      token,
-      expires,
-      identifier: email,
-    },
-  });
-  console.log("verficationToken", verficationToken);
+  // const verficationToken = await db.verificationToken.create({
+  //   data: {
+  //     token,
+  //     expires,
+  //     identifier: email,
+  //   },
+  // });
+  // console.log("verficationToken", verficationToken);
 
-  return verficationToken;
+  // return verficationToken;
 };

@@ -1,3 +1,5 @@
+
+// "use client"
 import Chat_text from "./chat.text";
 import Message_list from "./message.list";
 

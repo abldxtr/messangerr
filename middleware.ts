@@ -43,11 +43,11 @@ export default auth((req) => {
     let callbackUrl = nextUrl.pathname;
     if (nextUrl.search) {
       callbackUrl += nextUrl.search;
-      console.log("callbackUrl", callbackUrl);
+      // console.log("callbackUrl", callbackUrl);
     }
 
     const encodedCallbackUrl = encodeURIComponent(callbackUrl);
-    console.log("encodedCallbackUrl", encodedCallbackUrl);
+    // console.log("encodedCallbackUrl", encodedCallbackUrl);
 
     return NextResponse.redirect(
       new URL(`/login?callbackUrl=${encodedCallbackUrl}`, nextUrl),

@@ -9,8 +9,13 @@ import dynamic from "next/dynamic";
 import { Message, useMessage } from "@/context/MessageContext";
 import { useOnClickOutside } from "usehooks-ts";
 import ImgInput from "./img.input";
+import { useParams } from 'next/navigation';
 
 export default function InputChat() {
+  const params = useParams();
+  const chatId = params?.conversationId;
+  console.log("chatId", chatId)
+
   const { openEmoji, setOpenEmoji, open, setOpen } = useEmojiState();
   const [cursorPosition, setCursorPosition] = useState<number>(0);
   const { messages, setMessages, imgtemp, setImgTemp } = useMessage();
@@ -38,8 +43,10 @@ export default function InputChat() {
     //   setInputValue("");
     //   setImgTemp([]);
     // }
+    const senderId = "clzva2kvc000013g5uad3xck5"
+    const receiverId = "clzvas4qs0002nu5pxisejqj0"
     console.log("inputValue", JSON.stringify(inputValue));
-    const res = axios.post("/api/socket/messages", { text: inputValue });
+    const res = axios.post(`/api/socket/messages/${chatId}`, { message: inputValue, chatId: chatId, senderId: senderId, receiverId });
     setInputValue("");
 
     console.log("res", res);
@@ -88,10 +95,8 @@ export default function InputChat() {
   return (
     <div
       className={classNames(
-        // " bg-white  border-t border-[#eff3f4]  sticky bottom-0  py-1 isolate ",
         " bg-white  border-t border-[#eff3f4]    py-1 isolate ",
 
-        // open ? "z-10 sticky bottom-0 " : "z-[-1] hidden ",
       )}
     >
       {/* temp image  */}
@@ -204,7 +209,7 @@ export default function InputChat() {
                   " shrink-0 size-[34px] hover:bg-[#1d9bf01a] flex items-center fill-[#1d9bf0] justify-center transition-all duration-300 rounded-full  ",
                   " disabled:opacity-70 disabled:cursor-not-allowed disabled:pointer-events-none ",
                 )}
-                // disabled={!!!inputValue.trim()}
+              // disabled={!!!inputValue.trim()}
               >
                 <svg
                   viewBox="0 0 24 24"

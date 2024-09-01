@@ -27,26 +27,26 @@ export const login = async (
   const existingUser = await getUserByEmail(email);
   console.log("existingUser", existingUser);
 
-  if (!existingUser || !existingUser.email || !existingUser.hashedPassword) {
+  if (!existingUser || !existingUser.email || !existingUser.password) {
     return { error: "Email does not exist!" };
   }
-  if (existingUser.hashedPassword !== password) {
+  if (existingUser.password !== password) {
     return { error: "Email or password does not match!" };
   }
 
-  if (!existingUser.emailVerified) {
-    const verificationToken = await generateVerificationToken(
-      existingUser.email,
-    );
+  // if (!existingUser.emailVerified) {
+  //   const verificationToken = await generateVerificationToken(
+  //     existingUser.email,
+  //   );
 
-    // the email provider does not exit ...
-    // await sendVerificationEmail(
-    //   verificationToken.email,
-    //   verificationToken.token,
-    // );
+  //   // the email provider does not exit ...
+  //   // await sendVerificationEmail(
+  //   //   verificationToken.email,
+  //   //   verificationToken.token,
+  //   // );
 
-    return { verify: verificationToken };
-  }
+  //   return { verify: verificationToken };
+  // }
 
   try {
     await signIn("credentials", {

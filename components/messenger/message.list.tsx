@@ -116,7 +116,7 @@ export default function Message_list() {
           {/* <!-- 2 --> */}
           <div
             className="min-h-[40px] w-full flex-1   "
-            onClick={() => router.push("/conversations/123456")}
+            onClick={() => router.push("/conversations/clzva2kvc000013g5uad3xck5")}
           >
             <div
               className="flex  min-h-[40px] items-center cursor-pointer p-[12px] justify-between group 

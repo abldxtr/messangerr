@@ -6,14 +6,19 @@ import { useSocket } from "@/provider/socket-provider";
 import classNames from "classnames";
 import { formatDistanceToNow } from "date-fns";
 import { useEffect, useRef, useState } from "react";
+import { useParams } from 'next/navigation';
+
 
 export default function Messages() {
+  const params = useParams();
+  const chatId = params?.conversationId;
   const { socket } = useSocket();
   const { messages, setMessages } = useMessage();
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
   const { open, setOpen } = useEmojiState();
   console.log("messages", messages);
-  const channelKey = `chat:message`;
+
+  const channelKey = `chat:${chatId}:message`;
 
   const [msj, setMsj] = useState<string[]>([]);
 
@@ -26,6 +31,8 @@ export default function Messages() {
     if (!socket) {
       return;
     }
+    console.log("channelKey client", channelKey)
+
     socket.on(channelKey, (item: string) => {
       console.log("item", item);
       setMsj([...msj, item]);
